@@ -120,7 +120,7 @@ class Graph:
         depth-first order.
         """
         stack = deque()
-        # Each element in the stack is the current path e.g [1, 2, 3..]
+        
         stack.append([starting_vertex])
         visited = set()
         while len(stack) > 0:
@@ -134,6 +134,8 @@ class Graph:
                     newPath = list(currPath)
                     newPath.append(neighbor)
                     stack.append(newPath)
+
+
 
     def dfs_recursive(self, starting_vertex, destination_vertex):
         """
