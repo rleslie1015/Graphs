@@ -119,6 +119,20 @@ class Graph:
         starting_vertex to destination_vertex in
         depth-first order.
         """
+        # initialize the stack
+        # append the starting vert
+        # initialize the visited set
+        # while  the stack is not empty:
+            # set the currPath to the vert you pop from the stack  #Each element in the stack is the current path e.g [1, 2, 3..]
+           #  currNode = currPath[-1] 
+           # if the cur node == target:
+            # return the path
+           # if cur node is not in visited:
+                # add to visted
+                # then  loop through each neighbor for each neighbor in self.getneighbors():
+                    # make a Newpath var and set it to the list(currpath)  
+                    # append neighbor to this newpath
+                    # dont forget to append newpath to the stack
         stack = deque()
         
         stack.append([starting_vertex])
@@ -134,7 +148,6 @@ class Graph:
                     newPath = list(currPath)
                     newPath.append(neighbor)
                     stack.append(newPath)
-
 
 
     def dfs_recursive(self, starting_vertex, destination_vertex):
