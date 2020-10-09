@@ -47,6 +47,16 @@ else:
     print(f"{len(room_graph) - len(visited_rooms)} unvisited rooms")
 
 
+# put first room in the dictionary with the list of exits
+
+# while length of visited rooms < total rooms in graph
+    # loop through exits of room 
+        # if exit is not in visted
+            # set the list of exits to the room in visted dict
+            # mark the room as visited dict 
+            
+
+
 
 #######
 # UNCOMMENT TO WALK AROUND
