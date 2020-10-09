@@ -65,20 +65,14 @@ while len(rooms) < len(room_graph) - 1:
             # current room = last room from path
             last_room = traversal_path[-1]
             player.travel(last_room)
-            print(rooms[player.current_room.id])
     else:
         print("This should contain more paths to explor", rooms[player.current_room.id])
-            
-            #  go to last room
-    # loop through room of current room 
-    for room in rooms[player.current_room.id]:
-        # if room is not in visted
-        if room not in visited_rooms:
-            traversal_path.append(exit)
-            player.travel(room)
-            visited_rooms.add(exit)
+            #  
+            last_exit = rooms[player.current_room.id].pop()
+            traversal_path.append
+    # loop through exits of current room 
+        # if exit is not in visted
             # add to path
-
     # else if room has unexplored exits
 
 
@@ -87,8 +81,7 @@ print(room_graph)
 #######
 # UNCOMMENT TO WALK AROUND
 #######
-player.current_room.print_room_description(player)
-print(rooms[player.current_room.id])
+# player.current_room.print_room_description(player)
 # while True:
 #     cmds = input("-> ").lower().split(" ")
 #     if cmds[0] in ["n", "s", "e", "w"]:
