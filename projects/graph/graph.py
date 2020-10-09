@@ -93,7 +93,7 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        path = [starting_vertex] # starts path with starting verting
+        path = [starting_vertex] # starts path with starting vert
         #call helper function
         self.bfs_recursive_helper(starting_vertex, destination_vertex, path) 
         path.append(destination_vertex)
@@ -123,8 +123,8 @@ class Graph:
         # append the starting vert
         # initialize the visited set
         # while  the stack is not empty:
-            # set the currPath to the vert you pop from the stack  #Each element in the stack is the current path e.g [1, 2, 3..]
-           #  currNode = currPath[-1] 
+            # set the currPath to the path you pop from the stack  #Each element in the stack is the current path e.g [1, 2, 3..]
+           #  get the last vert from the path: currNode = currPath[-1] 
            # if the cur node == target:
             # return the path
            # if cur node is not in visited:
@@ -149,32 +149,47 @@ class Graph:
                     newPath.append(neighbor)
                     stack.append(newPath)
 
+    # FIRST Iteration of DFS using recursive helper function
+    # def dfs_recursive(self, starting_vertex, destination_vertex):
+    #     """
+    #     Return a list containing a path from
+    #     starting_vertex to destination_vertex in
+    #     depth-first order.
 
-    def dfs_recursive(self, starting_vertex, destination_vertex):
-        """
-        Return a list containing a path from
-        starting_vertex to destination_vertex in
-        depth-first order.
-
-        This should be done using recursion.
-        """
-        path = [starting_vertex] # starts path with starting verting
-        #call helper function
-        self.dfs_recursive_helper(starting_vertex, destination_vertex, path) 
+    #     This should be done using recursion.
+    #     """
+    #     path = [starting_vertex] # starts path with starting verting
+    #     #call helper function
+    #     self.dfs_recursive_helper(starting_vertex, destination_vertex, path) 
         
-        return path
+    #     return path
                 
-    def dfs_recursive_helper(self, starting_vertex, destination_vertex, path):
-        # base case 
-        if starting_vertex == destination_vertex:
-            return
-        # neighbors appends all neighbors of each vertex but resets everytime the function recurses
-        neighbors = [] 
-        for n in self.get_neighbors(starting_vertex):
-            neighbors.append(n) # this is where we append all the neighbors of each starting point
-        starting_vertex = neighbors[-1] # here we set the starting point to the last item in neighbors
-        path.append(starting_vertex) # we add this to the path to represent depth-ward
-        self.dfs_recursive_helper(starting_vertex, destination_vertex, path)
+    # def dfs_recursive_helper(self, starting_vertex, destination_vertex, path):
+    #     # base case 
+    #     if starting_vertex == destination_vertex:
+    #         return
+    #     # neighbors appends all neighbors of each vertex but resets everytime the function recurses
+    #     neighbors = [] 
+    #     for n in self.get_neighbors(starting_vertex):
+    #         neighbors.append(n) # this is where we append all the neighbors of each starting point
+    #     starting_vertex = neighbors[-1] # here we set the starting point to the last item in neighbors
+    #     path.append(starting_vertex) # we add this to the path to represent depth-ward
+    #     self.dfs_recursive_helper(starting_vertex, destination_vertex, path)
+
+    # ## SECOND iteration DFS recursion with out helper
+    def dfs_recursive(self, starting_vertex, target_vertex, visited=None, path=None):
+
+        if visited is None:
+            visited = set()
+        
+        if path is None:
+            path = [starting_vertex]
+
+        print(starting_vertex)
+
+        for neighbor in self.get_neighbors(starting_vertex):
+            if neighbor not in visited:
+                
 
 if __name__ == '__main__':
     graph = Graph()  # Instantiate your graph
