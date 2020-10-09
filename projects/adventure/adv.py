@@ -10,11 +10,11 @@ world = World()
 
 
 # You may uncomment the smaller graphs for development and testing purposes.
-# map_file = "maps/test_line.txt"
+map_file = "maps/test_line.txt"
 # map_file = "maps/test_cross.txt"
 # map_file = "maps/test_loop.txt"
 # map_file = "maps/test_loop_fork.txt"
-map_file = "maps/main_maze.txt"
+# map_file = "maps/main_maze.txt"
 
 # Loads the map into a dictionary
 room_graph=literal_eval(open(map_file, "r").read())
@@ -29,7 +29,7 @@ player = Player(world.starting_room)
 # traversal_path = ['n', 'n']
 traversal_path = []
 
-
+rooms = {}
 
 # TRAVERSAL TEST
 visited_rooms = set()
@@ -48,25 +48,52 @@ else:
 
 
 # put first room in the dictionary with the list of exits
+rooms[player.current_room] = player.current_room.get_exits()
 
 # while length of visited rooms < total rooms in graph
-    # loop through exits of room 
-        # if exit is not in visted
-            # set the list of exits to the room in visted dict
-            # mark the room as visited dict 
+while len(rooms) < len(room_graph) - 1:
+    # if room is not in visited
+    if player.current_room.id not in rooms:
+        # set the list of exits to the room in visted dict
+        rooms[player.current_room.id] = player.current_room.get_exits()
+        # mark the room as visited 
+        visited_rooms.add(player.current_room)
+        # add to the path
+        traversal_path.append(player.current_room.id)
+        # if the room has no exits
+        while len(rooms[player.current_room.id]) < 1:
+            # current room = last room from path
+            last_room = traversal_path[-1]
+            player.travel(last_room)
+            print(rooms[player.current_room.id])
+    else:
+        print("This should contain more paths to explor", rooms[player.current_room.id])
             
+            #  go to last room
+    # loop through room of current room 
+    for room in rooms[player.current_room.id]:
+        # if room is not in visted
+        if room not in visited_rooms:
+            traversal_path.append(exit)
+            player.travel(room)
+            visited_rooms.add(exit)
+            # add to path
+
+    # else if room has unexplored exits
 
 
+print(room_graph)
 
 #######
 # UNCOMMENT TO WALK AROUND
 #######
 player.current_room.print_room_description(player)
-while True:
-    cmds = input("-> ").lower().split(" ")
-    if cmds[0] in ["n", "s", "e", "w"]:
-        player.travel(cmds[0], True)
-    elif cmds[0] == "q":
-        break
-    else:
-        print("I did not understand that command.")
+print(rooms[player.current_room.id])
+# while True:
+#     cmds = input("-> ").lower().split(" ")
+#     if cmds[0] in ["n", "s", "e", "w"]:
+#         player.travel(cmds[0], True)
+#     elif cmds[0] == "q":
+#         break
+#     else:
+#         print("I did not understand that command.")
